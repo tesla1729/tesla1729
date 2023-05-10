@@ -4,7 +4,7 @@ FROM node:latest
 # Set the working directory to /app
 WORKDIR /app
 
-# Copy package.json and package-lock.json to the container
+# Copy package.json and packagesfatga-lock.json to the container
 COPY package*.json ./
 
 # Install Node.js dependencies
