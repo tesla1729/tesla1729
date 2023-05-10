@@ -9,12 +9,6 @@ jobs:
   tag-main-branch:
     runs-on: ubuntu-latest
     steps:
-      - name: Check if PR is merged
-        id: pr-merged
-        uses: andymckay/labelled-pull-request-action@v1
-        with:
-          labels: "merge"
-          
       - name: Get source branch name
         if: steps.pr-merged.outputs.merged == 'true'
         id: get-branch-name
