@@ -16,7 +16,7 @@ jobs:
         run: echo "{release_branch}={$(echo ${GITHUB_REF#refs/heads/release})}" >> $GITHUB_OUTPUT
       - name: Tag main branch with release tag
         run: |
-          echo ${GITHUB_REF#refs/heads/release}
+          echo ${GITHUB_REF#refs/heads/}
           echo ${{ steps.get_release_branch_name.outputs.release_branch }}
           git tag -a ${{ steps.get_release_branch_name.outputs.release_branch }} -m "Release ${{ steps.get_release_branch_name.outputs.release_branch }}"
           git push origin --tags
