@@ -3,7 +3,7 @@ FROM node:latest
 
 # Set the working directory to /app
 WORKDIR /app
-
+wfwf
 # Copy package.json and package-locSFSRFk.json to the container
 COPY package*.json ./
 
