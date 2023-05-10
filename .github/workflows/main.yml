@@ -1,21 +1,33 @@
+name: Tag Release on Merge to Main
+
 on:
-  workflow_dispatch:
   pull_request:
     types: [closed]
     branches:
-      - main
-
+      - release
 jobs:
-  release:
+  tag_release:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged && github.event.pull_request.base.ref == 'main'
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Get release branch name
-        id: get_release_branch_name
-        run: echo "::set-output name=release_branch::$(echo ${GITHUB_REF#refs/heads/})"
-      - name: Tag main branch with release tag
-        run: |
-          git tag -a ${{ steps.get_release_branch_name.outputs.release_branch }} -m "Release ${{ steps.get_release_branch_name.outputs.release_branch }}"
-          git push origin --tags
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Get the version number
+        id: get_version
+        run: echo "::set-output name=version::$(cat VERSION)"
+      - name: Create release tag
+        uses: actions/github-script@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const version = "${{ steps.get_version.outputs.version }}";
+            const context = {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag: `v${version}`,
+              ref: 'main',
+              message: `Release v${version}`
+            };
+            github.git.createRef(context);
