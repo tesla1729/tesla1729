@@ -10,13 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get source branch nam
-        id: get-branch-name
-        run: echo "::set-output name=branch::${{ github.event.pull_request.head.ref }}"
-
-      - name: Tag main branch with release branch name
-        if: startsWith(github.event.pull_request.head.ref, 'release/')
-        uses: mathieudutour/github-tag-action@v5
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ github.event.pull_request.head.ref }}
-          target: main
+        run: echo "${ github.event.pull_request.head.ref }"
