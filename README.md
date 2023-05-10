@@ -1,7 +1,7 @@
 - 👋 Hi, I’m @tesla1729
 - 👀 I’m interested in ...
 - 🌱 I’m currently learning ...sas
-- 💞️ I’m looking to collaboratetgte on ...sdsd
+- 💞️ I’m looking to collaboratetgte on ...sdsdwfwfe
 - 📫 How to reach msefdf32s2e ..erfefr.
 
 <!---dgd
